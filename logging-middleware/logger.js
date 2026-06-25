@@ -13,9 +13,7 @@ const localLogger = winston.createLogger({
     ]
 });
 
-
 const Log = async (level, pkg, message) => {
-    // We're strictly doing backend work here
     const logPayload = {
         stack: 'backend',
         level: String(level || 'info').toLowerCase(),
@@ -24,7 +22,6 @@ const Log = async (level, pkg, message) => {
     };
 
     try {
-        
         localLogger.log(logPayload.level, message, logPayload);
 
         const res = await axios.post('http://4.224.186.213/evaluation-service/logs', logPayload);
